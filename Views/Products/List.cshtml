@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Все товары</h1>
+
+<div class="flex-container">
+    @{
+
+            
+        foreach (var product in Model)
+        {
+            <div class="card m-4" style="width: 18rem;">
+                <img src="https://i.pravatar.cc/120?img=1" class="card-img-top" alt="...">
+                <div class="card-body">
+                        <h5 class="card-title">Категория: @product.Category.CategoryName</h5>
+                        <p class="card-text">
+                            Модель: @product.Brand.Name<br>
+                            Модель: @product.Model<br>
+                            Кузов: @product.CarBody<br>
+                            Цена: @product.Cost руб.<br>
+                            Год производства: @product.ProductionYear<br>
+                            Тип двигателя: @product.FuelType<br>
+                            Объем двигателя: @product.EngineCapacity<br>
+                        </p>
+                    <a href="#" class="btn btn-primary">Заказать</a>
+                </div>
+            </div>
+        }
+    }
+</div>
