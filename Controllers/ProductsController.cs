@@ -4,21 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SparePartsShop.Services.Data;
+using SparePartsShop.Models;
+
+
 
 namespace SparePartsShop.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IAllProducts _allProducts;
-        private readonly IBrand _brand;
-        private readonly IProductsCategory _productsCategory;
+        private  ProductsRepository products;
 
-        public ProductsController(IAllProducts allProducts, IBrand brand, IProductsCategory productsCategory)
+
+        //private readonly ArticlesRepository articlesRepository;
+        //public ArticlesController(ArticlesRepository articlesRepository)
+        //{
+        //    this.articlesRepository = articlesRepository;
+        //}
+
+        public ProductsController(ProductsRepository repository)
         {
-            _allProducts = allProducts;
-            _brand = brand;
-            _productsCategory = productsCategory;
+            products = repository;
         }
+        
+       
 
         public IActionResult Index()
         {
@@ -26,7 +35,9 @@ namespace SparePartsShop.Controllers
         }
         public ViewResult List()
         {
-            return View(_allProducts.GetAll);
+            // products.Initial();
+            Tuple<IEnumerable<Product>, IEnumerable<Brand>, IEnumerable<Category>> info = new(products.GetProducts(),products.GetBrands(),products.GetCategories());
+         return View(info);
         }
     }
 }

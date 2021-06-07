@@ -8,7 +8,7 @@ namespace SparePartsShop.Services.Interfaces
 {
     public interface IAllProducts
     {
-        IEnumerable<Product> GetAll { get;}
+        List<Product> GetAll { get;}
 
         Product GetProduct(int productId);    
     }

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SparePartsShop.Services.Interfaces
+namespace SparePartsShop.ViewModels
 {
-    public interface IBrand
+    public class ShopCartViewModel
     {
-        List<Brand> GetAllBrands { get; }
+        public ShopCartRepository _shopCart { get; set; }
     }
 }

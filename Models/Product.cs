@@ -1,4 +1,6 @@
-﻿namespace SparePartsShop.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SparePartsShop.Models
 {
     public class Product
     {
@@ -10,8 +12,12 @@
         public string EngineCapacity { get; set; }
         public string ProductionYear { get; set; }
         public string Img { get; set; }
+        public int BrandId { get; set; }
+        [ForeignKey("BrandId")]
         public Brand Brand { get; set; }
         public int Cost { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public Category Category { get; set; }
     }
 }

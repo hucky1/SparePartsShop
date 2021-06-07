@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SparePartsShop.Models;
+using SparePartsShop.Services.Data;
 using SparePartsShop.Services.Interfaces;
 using SparePartsShop.Services.Mocks;
 using System;
@@ -15,7 +19,7 @@ namespace SparePartsShop
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration  configuration)
         {
             Configuration = configuration;
         }
@@ -25,10 +29,25 @@ namespace SparePartsShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IAllProducts,MockProduct>();
-            services.AddTransient<IBrand, MockBrand>();
-            services.AddTransient<IProductsCategory, MockCategory>();
+            services.AddDbContext<AppDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<ProductsRepository>();
+            services.AddTransient<ShopCartRepository>();
+           // services.AddScoped(sp => ShopCartRepository.GetCart(sp));
+            //services.AddTransient(sp => ShopCartRepository.GetCart(sp));
+            services.AddTransient<IAllOrders, OrdersRepository>();
+           
+            //if (connection.Contains("[DataDirectory]"))
+            //{
+            //    connection = connection.Replace("[DataDirectory]", AppContext.BaseDirectory.Replace("\\","\\\\").Insert(2,"\\\\"));
+            //}
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddControllersWithViews();
+            services.AddMemoryCache();
+            services.AddSession();
+            
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,11 +65,11 @@ namespace SparePartsShop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

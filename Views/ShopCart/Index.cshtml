@@ -1,0 +1,19 @@
+﻿@model ShopCartViewModel
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<h1>Корзина</h1>
+<div class="container">
+    @foreach (var el in Model._shopCart.GetShopCartItems().ToList())
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Товар: </b> @el.Product.Model <br />
+            <b>Цена: </b> @el.Product.Cost <br />
+        </div>
+    }
+    <br />
+    @*<input class="btn btn-danger" type="submit" asp-controller="Order" asp-action="Index">Оплатить</input>*@
+    <a class="btn btn-primary" asp-controller="Order" asp-action="Index">Оплатить</a>
+</div>
+

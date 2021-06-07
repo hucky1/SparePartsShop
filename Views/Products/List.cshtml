@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model Tuple<IEnumerable<Product>, IEnumerable<Brand>, IEnumerable<Category>>
 @{
     ViewData["Title"] = "List";
 }
@@ -8,15 +8,18 @@
 <div class="flex-container">
     @{
 
+            foreach (var product in Model.Item1)
+            {
+                var _brand = Model.Item2.Where(x => x.Id == product.BrandId).FirstOrDefault().Name;
+                var str = $"~/images/products/{@product.Img}";
             
-        foreach (var product in Model)
-        {
-            <div class="card m-4" style="width: 18rem;">
-                <img src="https://i.pravatar.cc/120?img=1" class="card-img-top" alt="...">
-                <div class="card-body">
-                        <h5 class="card-title">Категория: @product.Category.CategoryName</h5>
+                <div class="card m-4" style="width: 18rem;">
+                @*<img src=$"~/images/products/Absorbers/{@_brand}_{@product.Model}" class="card-img-top" alt="...">*@
+                    <img class="card-img-top" src="~/images/products/@product.Img"  alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Категория: @Model.Item3.Where(x => x.Id == product.CategoryId).FirstOrDefault().CategoryName</h5>
                         <p class="card-text">
-                            Модель: @product.Brand.Name<br>
+                            Бренд: @_brand<br>
                             Модель: @product.Model<br>
                             Кузов: @product.CarBody<br>
                             Цена: @product.Cost руб.<br>
@@ -24,9 +27,9 @@
                             Тип двигателя: @product.FuelType<br>
                             Объем двигателя: @product.EngineCapacity<br>
                         </p>
-                    <a href="#" class="btn btn-primary">Заказать</a>
+                        <a class="btn btn-primary" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id">Добавить в корзину</a>
+                    </div>
                 </div>
-            </div>
-        }
+            }
     }
 </div>

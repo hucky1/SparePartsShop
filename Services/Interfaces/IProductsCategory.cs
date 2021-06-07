@@ -8,6 +8,6 @@ namespace SparePartsShop.Services.Interfaces
 {
     public interface IProductsCategory
     {
-        IEnumerable<Category> GetAllCategories { get; }
+        List<Category> GetAllCategories { get; }
     }
 }
