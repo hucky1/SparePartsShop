@@ -37,7 +37,10 @@ namespace SparePartsShop.Models
                     ProductId = el.Product.Id,
                     OrderId = order.Id,
                     Price = (uint)el.Product.Cost
+                    
                 };
+                _shopCart.DeleteItem(el.Id);
+                _context.SaveChanges();
                 _context.OrdersDetails.Add(orderDetails);
             }
             _context.SaveChanges();

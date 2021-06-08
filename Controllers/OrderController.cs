@@ -25,10 +25,6 @@ namespace SparePartsShop.Controllers
         [HttpPost]
         public IActionResult Index(Order order)
         {
-          
-            
-           
-            
             if (_shopCart.GetShopCartItems().Count == 0)
             {
                 ModelState.AddModelError("", "Вы не выбрали товары для покупки.");
