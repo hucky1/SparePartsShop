@@ -9,10 +9,10 @@ namespace SparePartsShop.Controllers
 {
     public class OrderController : Controller
     {
-        private  IAllOrders _orderRepository;
+        private  OrdersRepository _orderRepository;
         private  ShopCartRepository _shopCart;
 
-        public OrderController(IAllOrders orderRepository, ShopCartRepository shopCart)
+        public OrderController(OrdersRepository orderRepository, ShopCartRepository shopCart)
         {
             _orderRepository = orderRepository;
             _shopCart = shopCart;
@@ -36,6 +36,13 @@ namespace SparePartsShop.Controllers
             }
             return View(order);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var item = _orderRepository.GetOrder(id);
+            return View(item);
+        }
+     
         public IActionResult Complete()
         {
             ViewBag.Message = "Заказ успешно обработан.";

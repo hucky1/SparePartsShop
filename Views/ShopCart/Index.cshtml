@@ -3,7 +3,29 @@
     ViewData["Title"] = "Корзина";
 }
 
-<h1>Корзина</h1>
+<div class="row gray full-width page-header vertical-align-table">
+    <div class="row full-width padding-top-bottom-50 vertical-align-cell">
+        <div class="row">
+            <div class="page-header-left">
+                <h1>Корзина</h1>
+            </div>
+            <div class="page-header-right">
+                <div class="bread-crumb-container">
+                    <label>ВЫ СЕЙЧАС:</label>
+                    <ul class="bread-crumb">
+                        <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                        <li class="separator">
+                            &#47;
+                        </li>
+                        <li>
+                            Корзина
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>

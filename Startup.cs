@@ -31,11 +31,12 @@ namespace SparePartsShop
         {
             services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<OrdersRepository>();
             services.AddTransient<ProductsRepository>();
             services.AddTransient<ShopCartRepository>();
            // services.AddScoped(sp => ShopCartRepository.GetCart(sp));
             //services.AddTransient(sp => ShopCartRepository.GetCart(sp));
-            services.AddTransient<IAllOrders, OrdersRepository>();
+           
            
             //if (connection.Contains("[DataDirectory]"))
             //{

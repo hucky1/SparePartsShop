@@ -44,6 +44,7 @@ namespace SparePartsShop.Models
             _context.ShopCartItems.Remove(item);
             _context.SaveChanges();
         }
+ 
         public List<ShopCartItem> GetShopCartItems()
         {
             return _context.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s=> s.Product).ToList();
