@@ -38,6 +38,12 @@ namespace SparePartsShop.Models
             });
             _context.SaveChanges();
         }
+        public void DeleteItem(int id)
+        {
+            var item = _context.ShopCartItems.FirstOrDefault(x => x.Id == id);
+            _context.ShopCartItems.Remove(item);
+            _context.SaveChanges();
+        }
         public List<ShopCartItem> GetShopCartItems()
         {
             return _context.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s=> s.Product).ToList();

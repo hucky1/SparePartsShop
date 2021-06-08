@@ -28,6 +28,11 @@ namespace SparePartsShop.Controllers
             };
             return View(shopCartVM);
         }
+        public RedirectToActionResult Delete(int id)
+        {
+            _shopCart.DeleteItem(id);
+            return RedirectToAction("Index");
+        }
         public RedirectToActionResult AddToCart(int id)
         {
             var item = _productsRepository.GetProducts().FirstOrDefault(x => x.Id == id);
