@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SparePartsShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet"type="text/css" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 
     <title>CarService - Mechanic Auto Shop Template</title>
     <!--meta-->
@@ -38,13 +38,13 @@
             <div class="header-top-bar">
                 <ul class="contact-details clearfix">
                     <li class="template-phone">
-                        (520) 577 2710
+                        +375 (33) 305 00 00
                     </li>
                     <li class="template-mail">
-                        <a href="mailto:carservice@mail.com">carservice@mail.com</a>
+                        <a href="mailto:auto@mail.com">auto@mail.ru</a>
                     </li>
                     <li class="template-clock">
-                        Mon - Fri: 7:30am - 5:30pm
+                        Пн - Пт: 9:00 - 18:00
                     </li>
                 </ul>
                 <div class="search-container">
@@ -59,13 +59,13 @@
                 </div>
                 <ul class="social-icons">
                     <li>
-                        <a target="_blank" href="http://facebook.com/QuanticaLabs" class="social-facebook" title="facebook"></a>
+                        <a target="_blank" href="https://www.facebook.com/nastya.savicheva.75" class="social-facebook" title="facebook"></a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://twitter.com/QuanticaLabs" class="social-twitter" title="twitter"></a>
+                        <a target="_blank" href="https://twitter.com/login" class="social-twitter" title="twitter"></a>
                     </li>
                     <li>
-                        <a title="" href="http://themeforest.net/user/QuanticaLabs?ref=QuanticaLabs" class="social-vk"></a>
+                        <a title="" href="https://vk.com/n.savichevaa" class="social-vk"></a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
             <div class="vertical-align-table column-1-1">
                 <div class="header clearfix">
                     <div class="logo vertical-align-cell navbar-brand">
-                        <h1> @Html.ActionLink("CARSERVICE", "Index", "Home", new { area = "" })</h1>
+                        <h1> @Html.ActionLink("AUTO", "Index", "Home", new { area = "" })</h1>
                     </div>
                     <a href="#" class="mobile-menu-switch vertical-align-cell">
                         <span class="line"></span>
@@ -89,134 +89,29 @@
 
                                 <li>@Html.ActionLink("Главная", "Index", "Home")</li>
 
-                                
+
                                 <li>@Html.ActionLink("Галерея", "Gallery", "Home")</li>
-                                
+
                                 <li>@Html.ActionLink("О нас", "About", "Home")</li>
                                 <li>@Html.ActionLink("Товары", "List", "Products")</li>
                                 <li>@Html.ActionLink("Корзина", "Index", "ShopCart")</li>
-                              
+
                             </ul>
                         </nav>
                         <div class="mobile-menu-container">
                             <div class="mobile-menu-divider"></div>
-                            <nav>
-                                <ul class="mobile-menu collapsible-mobile-submenus">
-                                    <li>
-                                        <a href="index.html" title="Home">
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li class="selected">
-                                        <a href="services.html" title="Services">
-                                            Services
-                                        </a>
-                                        <a href="#" class="template-arrow-menu"></a>
-                                        <ul>
-                                            <li>
-                                                <a href="service_engine_diagnostics.html" title="Engine Diagnostics">
-                                                    Engine Diagnostics
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="service_lube_oil_filters.html" title="Lube, Oil and Filters">
-                                                    Lube, Oil and Filters
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="service_belts_hoses.html" title="Belts and Hoses">
-                                                    Belts and Hoses
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="service_air_conditioning.html" title="Air Conditioning">
-                                                    Air Conditioning
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="service_brake_repair.html" title="Brake Repair">
-                                                    Brake Repair
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="service_tire_wheel.html" title="Tire and Wheel Services">
-                                                    Tire and Wheel Services
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="galleries.html" title="Gallery">
-                                            Gallery
-                                        </a>
-                                        <a href="#" class="template-arrow-menu"></a>
-                                        <ul>
-                                            <li>
-                                                <a href="gallery_engine_diagnostics.html" title="Engine Diagnostics">
-                                                    Engine Diagnostics
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_oil_change.html" title="Oil Change">
-                                                    Oil Change
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_belts_hoses.html" title="Belts and Hoses">
-                                                    Belts and Hoses
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_tire_change.html" title="Tire Change">
-                                                    Tire Change
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_wheel_services.html" title="Wheel Services">
-                                                    Wheel Services
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_lube_services.html" title="Lube Services">
-                                                    Lube Services
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_brake_repair.html" title="Brake Repair">
-                                                    Brake Repair
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="gallery_other_car_services.html" title="Other Car Services">
-                                                    Other Car Services
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="about.html" title="Pages">
-                                            About
-                                        </a>
-                                        <a href="#" class="template-arrow-menu"></a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" title="Blog">
-                                            Blog
-                                        </a>
-                                        <a href="#" class="template-arrow-menu"></a>
-                                    </li>
-                                    <li>
-                                        <a href="appointment.html" title="Appointment">
-                                            Appointment
-                                        </a>
-                                    </li>
-                                    <li class="left-flyout">
-                                        <a href="contact.html" title="Contact">
-                                            Contact
-                                        </a>
-                                        <a href="#" class="template-arrow-menu"></a>
-                                    </li>
-                                </ul>
+                            <ul class="sf-menu">
+
+                                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+
+
+                                <li>@Html.ActionLink("Галерея", "Gallery", "Home")</li>
+
+                                <li>@Html.ActionLink("О нас", "About", "Home")</li>
+                                <li>@Html.ActionLink("Товары", "List", "Products")</li>
+                                <li>@Html.ActionLink("Корзина", "Index", "ShopCart")</li>
+
+                            </ul>
                             </nav>
                         </div>
                     </div>
@@ -233,31 +128,30 @@
     <div class="row dark-gray footer-row full-width padding-top-30 padding-bottom-50">
         <div class="row row-4-4 top-border page-padding-top">
             <div class="column column-1-4">
-                <h6 class="box-header">ABOUT US</h6>
+                <h6 class="box-header">Контакты</h6>
                 <ul class="list simple margin-top-20">
-                    <li>Tucson, Arizona 80210</li>
-                    <li>501 Archwood Lane</li>
-                    <li><span>Mobile:</span>(520) 577 2710</li>
-                    <li><span>Assistance:</span>(520) 577 2725</li>
-                    <li><span>E-mail:</span><a href="mailto:carservice@mail.com">carservice@mail.com</a></li>
+                    <li>г. Орша</li>
+                    <li>Оршанская 55</li>
+                    <li><span>Моб. телефон:</span>+375 (33) 305 00 00</li>
+                    <li><span>E-mail:</span><a href="mailto:auto@mail.com">auto@mail.ru</a></li>
                 </ul>
             </div>
             <div class="column column-1-4">
-                <h6 class="box-header">HOURS</h6>
+                <h6 class="box-header">График работы</h6>
                 <ul class="list simple margin-top-20">
-                    <li><span>Monday:</span>7:30am - 5:30pm</li>
-                    <li><span>Tuesday:</span>7:30am - 5:30pm</li>
-                    <li><span>Wednesday:</span>7:30am - 5:30pm</li>
-                    <li><span>Thursday:</span>7:30am - 5:30pm</li>
-                    <li><span>Friday:</span>7:30am - 5:30pm</li>
-                    <li><span>Saturday:</span>7:30am - 3:00pm</li>
-                    <li><span>Sunday:</span>Closed</li>
+                    <li><span>Понедельник:</span>9:00 - 18:00</li>
+                    <li><span>Вторник:</span>9:00 - 18:00</li>
+                    <li><span>Среда:</span>9:00 - 18:00</li>
+                    <li><span>Четверг:</span>9:00 - 18:00</li>
+                    <li><span>Пятница:</span>9:00 - 18:00</li>
+                    <li><span>Суббота:</span>10:00 - 15:00</li>
+                    <li><span>Воскресенье:</span>Закрыто</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="row align-center padding-top-bottom-30">
-        <span class="copyright">© Copyright 2015 <a href="http://themeforest.net/item/carservice-mechanic-auto-shop-template/12332985?ref=QuanticaLabs" title="Carservice Template" target="_blank">Carservice Template</a> by <a href="http://quanticalabs.com" title="QuanticaLabs" target="_blank">QuanticaLabs</a></span>
+        <span class="copyright">© Copyright 2021 Auto</span>
     </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
