@@ -31,7 +31,7 @@ namespace SparePartsShop.Models
         public string Email { get; set; }
         
         [ScaffoldColumn(false)]
-
+        [Display(Name = "Время заказа")]
         public DateTime OrderTime { get; set; }
 
         public List<OrderDetails> OrderDetails { get; set; }
