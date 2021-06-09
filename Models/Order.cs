@@ -31,6 +31,7 @@ namespace SparePartsShop.Models
         public string Email { get; set; }
         
         [ScaffoldColumn(false)]
+        [Display(Name = "Адрес заказа")]
 
         public DateTime OrderTime { get; set; }
 
