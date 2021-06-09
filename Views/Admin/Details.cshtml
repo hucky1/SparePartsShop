@@ -4,9 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Details</h1>
 
-<div>
+<div class="col-md-8 offset-md-2">
     <h4>Order</h4>
     <hr />
     <dl class="row">
@@ -42,7 +42,7 @@
         </dd>
     </dl>
 </div>
-@Html.Partial("OrderDetailsList", Model.Item2);
+@Html.Partial("OrderDetailsList", Model.Item2)
 
 <div>
     <a asp-action="Index">Back to List</a>

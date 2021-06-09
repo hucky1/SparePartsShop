@@ -25,6 +25,11 @@ namespace SparePartsShop.Controllers
             _ordersRepository.DeleteOrder(id);
             return RedirectToAction("Index");
         }
+        public RedirectToActionResult DeleteDetails(int id)
+        {
+            _ordersRepository.GetOrderDetails(id);
+            return RedirectToAction("Details");
+        }
         public IActionResult Details(int id)
         {
             var item = _ordersRepository.GetOrder(id);
