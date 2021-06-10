@@ -1,0 +1,86 @@
+﻿
+@model Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>>
+
+@{
+    ViewData["Title"] = "ProductsList";
+}
+
+<h1>ProductsList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Модель
+            </th>
+            <th>
+                Тип кузова
+            </th>
+            <th>
+                Тип топлива
+            </th>
+            <th>
+                Ёмкость двигателя
+            </th>
+            <th>
+                Год выпуска
+            </th>
+            <th>
+                Путь к картинке
+            </th>
+            <th>
+                Марка
+            </th>
+            <th>
+                Цена
+            </th>
+            <th>
+                Категория
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarBody)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuelType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductionYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Img)
+                </td>
+                <td>
+                    @*@Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value*@
+                    @Html.DisplayFor(modelItem => @Model.Item2.FirstOrDefault(x => x.Key == item.BrandId).Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => @Model.Item3.FirstOrDefault(x => x.Key == item.CategoryId).Value)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

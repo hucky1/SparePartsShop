@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SparePartsShop.Models;
+using SparePartsShop.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace SparePartsShop.Controllers
     {
 
         private OrdersRepository _ordersRepository;
+        private ProductsRepository _productsRepository;
 
-        public AdminController(OrdersRepository ordersRepository)
+        public AdminController(OrdersRepository ordersRepository,ProductsRepository productsRepository)
         {
             _ordersRepository = ordersRepository;
+            _productsRepository = productsRepository;
         }
 
         public IActionResult Index()=>
@@ -35,6 +38,11 @@ namespace SparePartsShop.Controllers
             var item = _ordersRepository.GetOrder(id);
             List<OrderDetails> itemOrders = _ordersRepository.GetOrderDetails(id);
             Tuple<Order, List<OrderDetails>> info = new(item, itemOrders);
+            return View(info);
+        }
+        public IActionResult ProductsList()
+        {
+            Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(_productsRepository.GetProducts(), _productsRepository.GetBrandsDict(), _productsRepository.GetCategoriesDict());
             return View(info);
         }
         [HttpPost]

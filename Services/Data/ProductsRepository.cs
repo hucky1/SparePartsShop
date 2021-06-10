@@ -15,7 +15,18 @@ namespace SparePartsShop.Services.Data
             _context = context;
         }
 
-
+        public Dictionary<int,string> GetBrandsDict()
+        {
+            Dictionary<int, string> brands = new Dictionary<int, string>();
+            _context.Brands.ToList().ForEach(x => brands.Add(x.Id, x.Name));
+            return brands;
+        }
+        public Dictionary<int, string> GetCategoriesDict()
+        {
+            Dictionary<int, string> categories = new Dictionary<int, string>();
+            _context.Categories.ToList().ForEach(x => categories.Add(x.Id, x.CategoryName));
+            return categories;
+        }
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products;
