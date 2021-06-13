@@ -3,7 +3,7 @@
     ViewData["Title"] = "List";
 }
 
-<h1>Все товары</h1>
+<h1 class="text-center">Все товары</h1>
 
 <div class="flex-container">
     @{
@@ -17,7 +17,7 @@
 
             <div class="card m-4" style="width: 18rem;">
                 @*<img src=$"~/images/products/Absorbers/{@_brand}_{@product.Model}" class="card-img-top" alt="...">*@
-                <img class="card-img-top" src="~/images/products/@product.Img" alt="...">
+                <img class="card-img-top" src="~/images/products/@product.Img" width="350" height="250" alt="...">
                 <div class="card-body">
                     @*@Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value //////// types.FirstOrDefault(x => x.Value == "one").Key*@
                     @*<h5 class="card-title">Категория: @Model.Item3.Where(x => x.Id == product.CategoryId).FirstOrDefault().CategoryName</h5>*@
