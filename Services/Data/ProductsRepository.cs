@@ -14,7 +14,7 @@ namespace SparePartsShop.Services.Data
         {
             _context = context;
         }
-
+        
         public Dictionary<int,string> GetBrandsDict()
         {
             Dictionary<int, string> brands = new Dictionary<int, string>();
@@ -26,6 +26,11 @@ namespace SparePartsShop.Services.Data
             Dictionary<int, string> categories = new Dictionary<int, string>();
             _context.Categories.ToList().ForEach(x => categories.Add(x.Id, x.CategoryName));
             return categories;
+        }
+        public void Add(Product product)
+        {
+            _context.Products.Add(product);
+            _context.SaveChanges();
         }
         public IEnumerable<Product> GetProducts()
         {
@@ -39,6 +44,16 @@ namespace SparePartsShop.Services.Data
         public IEnumerable<Category> GetCategories()
         {
             return _context.Categories;
+        }
+        public IEnumerable<Product> GetByCategory(int categoryId)
+        {
+            var items = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
+            return items;
+        }
+        public IEnumerable<Product> GetByBrand(int brandId)
+        {
+            var items = _context.Products.Where(x => x.BrandId == brandId).ToList();
+            return items;
         }
 
     }

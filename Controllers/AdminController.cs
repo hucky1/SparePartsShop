@@ -33,6 +33,16 @@ namespace SparePartsShop.Controllers
             _ordersRepository.GetOrderDetails(id);
             return RedirectToAction("Details");
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public RedirectToActionResult Create(Product product)
+        {
+            _productsRepository.Add(product);
+            return RedirectToAction("ProductsList");
+        }
         public IActionResult Details(int id)
         {
             var item = _ordersRepository.GetOrder(id);
