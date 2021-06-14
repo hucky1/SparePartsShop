@@ -36,7 +36,7 @@ namespace SparePartsShop.Controllers
         public ViewResult List()
         {
             // products.Initial();
-            Tuple<IEnumerable<Product>, IEnumerable<Brand>, IEnumerable<Category>> info = new(products.GetProducts(),products.GetBrands(),products.GetCategories());
+            Tuple<IEnumerable<Product>, Dictionary<int,string>, Dictionary<int, string>> info = new(products.GetProducts(),products.GetBrandsDict(),products.GetCategoriesDict());
          return View(info);
         }
     }

@@ -15,7 +15,7 @@ namespace SparePartsShop.Models
         [Required(ErrorMessage ="Длинна имени должна быть не менее 5 символов")]
         public string Name { get; set; }
         [Display(Name = "Фамилия")]
-           [Required(ErrorMessage = "Длинна фамилии должна быть не менее 5 символов")]
+        [Required(ErrorMessage = "Длинна фамилии должна быть не менее 5 символов")]
         public string SurName { get; set; }
         [Display(Name = "Адрес")]
         [Required(ErrorMessage = "Длинна адреса должна быть не менее 15 символов")]
@@ -31,10 +31,11 @@ namespace SparePartsShop.Models
         public string Email { get; set; }
         
         [ScaffoldColumn(false)]
-        [Display(Name = "Время заказа")]
+        [Display(Name = "Адрес заказа")]
+
         public DateTime OrderTime { get; set; }
 
-        public List<OrderDetails> OrderDetails { get; set; }
+        public virtual List<OrderDetails> OrderDetails { get; set; }
 
     }
 }

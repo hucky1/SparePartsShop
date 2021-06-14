@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SparePartsShop.Models
 {
@@ -19,5 +20,6 @@ namespace SparePartsShop.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+        public virtual List<OrderDetails> OrderDetails { get; set; }
     }
 }

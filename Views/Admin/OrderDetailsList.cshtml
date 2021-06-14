@@ -1,17 +1,14 @@
 ﻿@model IEnumerable<SparePartsShop.Models.OrderDetails>
 
-
-<table class="table">
+<br/><br /><br />
+<table class="table container">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Товар
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order)
+                Цена
             </th>
             <th></th>
         </tr>
@@ -20,18 +17,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Product.Model)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Category)
+                @Html.DisplayFor(modelItem => item.Product.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Order.Adress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="DeleteDetails" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

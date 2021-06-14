@@ -9,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 using SparePartsShop.Models;
 using SparePartsShop.Services.Data;
 using SparePartsShop.Services.Interfaces;
-using SparePartsShop.Services.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;

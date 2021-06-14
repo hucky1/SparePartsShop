@@ -34,6 +34,9 @@ namespace SparePartsShop.Services.Data
             .HasOne(p => p.Category)
             .WithMany(t => t.Products)
             .HasForeignKey(p => p.CategoryId);
+
+
+
         }
     }
 }   

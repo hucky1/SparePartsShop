@@ -31,13 +31,17 @@ namespace SparePartsShop.Models
 
             foreach (var el in items)
             {
-                var orderDetails = new OrderDetails
+                OrderDetails orderDetails = new OrderDetails
                 {
                     ProductId = el.Product.Id,
                     OrderId = order.Id,
-                    Price = (uint)el.Product.Cost
+                    Price = (uint)el.Product.Cost,
+                    Product = el.Product,
+                    Order = order
+                    
                     
                 };
+                _context.SaveChanges();
                 _shopCart.DeleteItem(el.Id);
                 _context.SaveChanges();
                 _context.OrdersDetails.Add(orderDetails);
@@ -56,9 +60,20 @@ namespace SparePartsShop.Models
             _context.OrdersDetails.RemoveRange(details);
             _context.SaveChanges();
         }
+        public void DeleteDetails(int id)
+        {
+            var details = _context.OrdersDetails.FirstOrDefault(x => x.Id == id);
+            _context.OrdersDetails.Remove(details);
+            _context.SaveChanges();
+        }
         public List<OrderDetails> GetOrderDetails(int orderId)
         {
-            var orderItems = _context.OrdersDetails.Where(x => x.OrderId == orderId).ToList();
+            List<OrderDetails> orderItems = _context.OrdersDetails.Where(x => x.OrderId == orderId).ToList();
+            foreach(var el in orderItems)
+            {
+                int id = el.ProductId;
+                el.Product = _context.Products.FirstOrDefault(x => x.Id == id);
+            }
             return orderItems;
         }
         public List<Order> GetOrders()

@@ -4,9 +4,14 @@
     ViewData["Title"] = "Main";
 }
 
-<h1>Main</h1>
+<h1 class="text-center">Main</h1>
+<br/><br />
+<div class="text-center">
+    <a asp-action="ProductsList" class="btn btn-primary text-center">Товары</a>
+</div>
+<br /><br />
 
-<table class="table">
+<table class="table container">
     <thead>
         <tr>
             <th>
@@ -23,9 +28,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderTime)
             </th>
             <th></th>
         </tr>
@@ -49,9 +51,6 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderTime)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-controller="Order" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -59,4 +58,5 @@
         </tr>
 }
     </tbody>
+    
 </table>
