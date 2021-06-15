@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SparePartsShop.Models;
 using SparePartsShop.Services.Data;
 using System;
@@ -23,7 +24,7 @@ namespace SparePartsShop.Controllers
         public IActionResult Index()=>
             View(_ordersRepository.GetOrders());
         
-        public RedirectToActionResult Delete(int id)
+        public RedirectToActionResult DeleteOrder(int id)
         {
             _ordersRepository.DeleteOrder(id);
             return RedirectToAction("Index");
@@ -33,15 +34,48 @@ namespace SparePartsShop.Controllers
             _ordersRepository.GetOrderDetails(id);
             return RedirectToAction("Details");
         }
-        public IActionResult Create()
+        public RedirectToActionResult DeleteProduct(int id)
         {
-            return View();
+            _productsRepository.Delete(id);
+            return RedirectToAction("ProductsList");
+        }
+        public IActionResult CreateProduct()
+        {
+            ViewBag.BrandId = _productsRepository.GetBrandsDict().Select(r => new SelectListItem(r.Value,r.Key.ToString()));
+            ViewBag.CategoryId = _productsRepository.GetCategoriesDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
+            return View("ProductForm", new Product());
         }
         [HttpPost]
-        public RedirectToActionResult Create(Product product)
+        public RedirectToActionResult ProcessCreate(Product product)
         {
-            _productsRepository.Add(product);
+            Product prod = _productsRepository.GetProduct(product);
+
+            if (prod is not null)
+            {
+                prod.BrandId = product.BrandId;
+                prod.CarBody = product.CarBody;
+                prod.CategoryId = product.CategoryId;
+                prod.Cost = prod.Cost;
+                prod.EngineCapacity = product.EngineCapacity;
+                prod.FuelType = product.FuelType;
+                prod.Img = product.Img;
+                prod.ProductionYear = product.ProductionYear;
+                prod.Model = product.Model;
+                _productsRepository.Save();
+            }
+            else
+            {
+                _productsRepository.Add(product);
+            }
+            
             return RedirectToAction("ProductsList");
+        }
+        public IActionResult Edit(int id)
+        {
+            Product product = _productsRepository.GetProducts().SingleOrDefault(x => x.Id == id);
+            ViewBag.BrandId = _productsRepository.GetBrandsDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
+            ViewBag.CategoryId = _productsRepository.GetCategoriesDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
+            return View("ProductForm", product);
         }
         public IActionResult Details(int id)
         {

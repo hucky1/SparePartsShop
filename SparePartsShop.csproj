@@ -7,9 +7,25 @@
 
   <ItemGroup>
     <Compile Remove="Views\Новая папка1\**" />
+    <Compile Remove="wwwroot\images\products\2 - Копировать %282%29\**" />
+    <Compile Remove="wwwroot\images\products\2 - Копировать %283%29\**" />
+    <Compile Remove="wwwroot\images\products\2 - Копировать\**" />
+    <Compile Remove="wwwroot\images\products\2\**" />
     <Content Remove="Views\Новая папка1\**" />
+    <Content Remove="wwwroot\images\products\2 - Копировать %282%29\**" />
+    <Content Remove="wwwroot\images\products\2 - Копировать %283%29\**" />
+    <Content Remove="wwwroot\images\products\2 - Копировать\**" />
+    <Content Remove="wwwroot\images\products\2\**" />
     <EmbeddedResource Remove="Views\Новая папка1\**" />
+    <EmbeddedResource Remove="wwwroot\images\products\2 - Копировать %282%29\**" />
+    <EmbeddedResource Remove="wwwroot\images\products\2 - Копировать %283%29\**" />
+    <EmbeddedResource Remove="wwwroot\images\products\2 - Копировать\**" />
+    <EmbeddedResource Remove="wwwroot\images\products\2\**" />
     <None Remove="Views\Новая папка1\**" />
+    <None Remove="wwwroot\images\products\2 - Копировать %282%29\**" />
+    <None Remove="wwwroot\images\products\2 - Копировать %283%29\**" />
+    <None Remove="wwwroot\images\products\2 - Копировать\**" />
+    <None Remove="wwwroot\images\products\2\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,13 +51,6 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\products\2 - Копировать %282%29\" />
-    <Folder Include="wwwroot\images\products\2 - Копировать %283%29\" />
-    <Folder Include="wwwroot\images\products\2 - Копировать\" />
-    <Folder Include="wwwroot\images\products\2\" />
   </ItemGroup>
 
 </Project>

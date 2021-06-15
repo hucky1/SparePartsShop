@@ -15,6 +15,11 @@ namespace SparePartsShop.Services.Data
             _context = context;
         }
         
+        public void Delete(int id)
+        {
+            _context.Products.Remove(_context.Products.FirstOrDefault(x=>x.Id==id));
+            _context.SaveChanges();
+        }
         public Dictionary<int,string> GetBrandsDict()
         {
             Dictionary<int, string> brands = new Dictionary<int, string>();
@@ -26,6 +31,15 @@ namespace SparePartsShop.Services.Data
             Dictionary<int, string> categories = new Dictionary<int, string>();
             _context.Categories.ToList().ForEach(x => categories.Add(x.Id, x.CategoryName));
             return categories;
+        }
+        public Product GetProduct(Product product)
+        {
+            Product prod = _context.Products.SingleOrDefault(g => g.Id == product.Id);
+            return prod;
+        }
+        public void Save()
+        {
+            _context.SaveChanges();
         }
         public void Add(Product product)
         {
