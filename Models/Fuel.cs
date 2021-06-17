@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace SparePartsShop.Models
 {
-    public class ShopCartItem
+    public class Fuel
     {
         public int Id { get; set; }
-        public Product Product { get; set; }
-        public int Price { get; set; }
-        public string ShopCartId { get; set; }
+        public string Name { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

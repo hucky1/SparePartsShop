@@ -11,31 +11,11 @@ namespace SparePartsShop.Models
     {
         //[BindNever]
         public int Id { get; set; }
-        [Display(Name = "Имя")]
-        [Required(ErrorMessage ="Длинна имени должна быть не менее 5 символов")]
-        public string Name { get; set; }
-        [Display(Name = "Фамилия")]
-        [Required(ErrorMessage = "Длинна фамилии должна быть не менее 5 символов")]
-        public string SurName { get; set; }
-        [Display(Name = "Адрес")]
-        [Required(ErrorMessage = "Длинна адреса должна быть не менее 15 символов")]
-
-        public string Adress { get; set; }
-        [Display(Name = "Номер телефона")]
-        [DataType(DataType.PhoneNumber)]
-          [Required(ErrorMessage = "Длинна ноvера должна быть не менее 10 символов")]
-        public string Phone { get; set; }
-        [Display(Name = "Электронный почтовый ящик")]
-        [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "Длинна почтового ящика должна быть не менее 10 символов")]
-        public string Email { get; set; }
-        
-        [ScaffoldColumn(false)]
-        [Display(Name = "Адрес заказа")]
+        public Client Client { get; set; }
 
         public DateTime OrderTime { get; set; }
 
-        public virtual List<OrderDetails> OrderDetails { get; set; }
+        public virtual List<OrderItem> Products { get; set; }
 
     }
 }

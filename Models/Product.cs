@@ -10,27 +10,33 @@ namespace SparePartsShop.Models
 
         [Display(Name = "Модель")]
         public string Model { get; set; }
-        [Display(Name = "Nип кузова")]
-        public string CarBody { get; set; }
-        [Display(Name = "Топливо")]
-        public string FuelType { get; set; }
-        [Display(Name = "Объём двигателя")]
-        public string EngineCapacity { get; set; }
-        [Display(Name = "Год производства")]
-        public string ProductionYear { get; set; }
-        [Display(Name = "Путь к картинке")]
-        public string Img { get; set; }
-        [Display(Name ="Марка")]
-        public int BrandId { get; set; }
-        [ForeignKey("BrandId")]
+        [Display(Name = "Марка")]
+
         public Brand Brand { get; set; }
+        [Display(Name = "Категория")]
+
+        public Category Category { get; set; }
         [Display(Name = "Цена")]
         public int Cost { get; set; }
-        [Display(Name = "Категория")]
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
-        public virtual List<OrderDetails> OrderDetails { get; set; }
+        [Display(Name = "Объём двигателя")]
+        public double EngineCapacity { get; set; }
+        [Display(Name = "Топливо")]
+        public Fuel FuelType { get; set; }
+        [Display(Name = "Путь к картинке")]
+        public string Img { get; set; }
+        [Display(Name = "Год производства")]
+        public string ProductionYear { get; set; }
+        [Display(Name = "Nип кузова")]
+        public string CarBody { get; set; }
+
+
+
+
+
+
+
+
+        //public virtual List<OrderDetails> OrderDetails { get; set; }
 
         //public Product(int id, string model, string carBody, string fuelType, string engineCapacity, string productionYear, string img, int brandId, int cost, int categoryId)
         //{

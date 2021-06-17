@@ -40,7 +40,7 @@
         {
             @*@Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value*@
             //var _brand = Model.Item2.Where(x => x.Id == product.BrandId).FirstOrDefault().Name;
-            var _brand = @Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value;
+            //var _brand = @Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value;
             var str = $"~/images/products/{@product.Img}";
 
             <div class="card m-4" style="width: 18rem;">
@@ -49,10 +49,10 @@
                 <div class="card-body">
                     @*@Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value //////// types.FirstOrDefault(x => x.Value == "one").Key*@
                     @*<h5 class="card-title">Категория: @Model.Item3.Where(x => x.Id == product.CategoryId).FirstOrDefault().CategoryName</h5>*@
-                    <h5 class="card-title">Категория: @Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value</h5>
+                    @*<h5 class="card-title">Категория: @Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value</h5>*@
                     <p class="card-text">
                     <p class="card-text">
-                        Бренд: @_brand<br>
+                        @*Бренд: @_brand<br>*@
                         Модель: @product.Model<br>
                         Кузов: @product.CarBody<br>
                         Цена: @product.Cost руб.<br>

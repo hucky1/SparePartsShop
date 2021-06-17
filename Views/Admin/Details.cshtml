@@ -1,4 +1,4 @@
-﻿@model Tuple<Order, List<OrderDetails>>
+﻿@model Tuple<Order, List<OrderItem>>
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +6,7 @@
 
 <h1 class="text-center">Details</h1>
 
-<div class="col-md-8 offset-md-2">
+@*<div class="col-md-8 offset-md-2">
     <h4>Order</h4>
     <hr />
     <dl class="row">
@@ -41,8 +41,8 @@
             @Html.DisplayFor(model => model.Item1.Email)
         </dd>
     </dl>
-</div>
-@Html.Partial("OrderDetailsList", Model.Item2)
+</div>*@
+@*@Html.Partial("OrderDetailsList", Model.Item2)*@
 
 <div>
     <a asp-action="Index">Back to List</a>

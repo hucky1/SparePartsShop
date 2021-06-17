@@ -10,15 +10,15 @@ using SparePartsShop.Services.Data;
 namespace SparePartsShop.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210607095208_orders")]
-    partial class orders
+    [Migration("20210617211433_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("SparePartsShop.Models.Brand", b =>
@@ -57,7 +57,7 @@ namespace SparePartsShop.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("SparePartsShop.Models.Order", b =>
+            modelBuilder.Entity("SparePartsShop.Models.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,10 +73,10 @@ namespace SparePartsShop.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderTime")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("PhoneNumner")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SurName")
@@ -84,24 +84,57 @@ namespace SparePartsShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("SparePartsShop.Models.OrderDetails", b =>
+            modelBuilder.Entity("SparePartsShop.Models.Fuel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("OrderId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fuels");
+                });
+
+            modelBuilder.Entity("SparePartsShop.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("OrderTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SparePartsShop.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ShopCartId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -109,7 +142,7 @@ namespace SparePartsShop.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrdersDetails");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SparePartsShop.Models.Product", b =>
@@ -119,23 +152,23 @@ namespace SparePartsShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<string>("CarBody")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");
 
-                    b.Property<string>("EngineCapacity")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("EngineCapacity")
+                        .HasColumnType("float");
 
-                    b.Property<string>("FuelType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("FuelTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)");
@@ -152,47 +185,31 @@ namespace SparePartsShop.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("FuelTypeId");
+
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SparePartsShop.Models.ShopCartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShopCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShopCartItems");
-                });
-
-            modelBuilder.Entity("SparePartsShop.Models.OrderDetails", b =>
+            modelBuilder.Entity("SparePartsShop.Models.Client", b =>
                 {
                     b.HasOne("SparePartsShop.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SparePartsShop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
+                        .WithOne("Client")
+                        .HasForeignKey("SparePartsShop.Models.Client", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("SparePartsShop.Models.OrderItem", b =>
+                {
+                    b.HasOne("SparePartsShop.Models.Order", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("SparePartsShop.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
@@ -201,28 +218,21 @@ namespace SparePartsShop.Migrations
                 {
                     b.HasOne("SparePartsShop.Models.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.HasOne("SparePartsShop.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("SparePartsShop.Models.Fuel", "FuelType")
+                        .WithMany("Products")
+                        .HasForeignKey("FuelTypeId");
 
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-                });
 
-            modelBuilder.Entity("SparePartsShop.Models.ShopCartItem", b =>
-                {
-                    b.HasOne("SparePartsShop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Product");
+                    b.Navigation("FuelType");
                 });
 
             modelBuilder.Entity("SparePartsShop.Models.Brand", b =>
@@ -235,9 +245,16 @@ namespace SparePartsShop.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("SparePartsShop.Models.Fuel", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("SparePartsShop.Models.Order", b =>
                 {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("Client");
+
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

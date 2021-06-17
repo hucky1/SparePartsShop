@@ -32,18 +32,18 @@ namespace SparePartsShop.Controllers
             return RedirectToAction("List");
         }
        
-       public IActionResult FindByCategory(int categoryId)
-       {
-            //CurrentProducts = products.GetByCategory(categoryId);
-            Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByCategory(categoryId), products.GetBrandsDict(), products.GetCategoriesDict());
-            return View("List",info);
-        }
+       //public IActionResult FindByCategory(int categoryId)
+       //{
+       //     //CurrentProducts = products.GetByCategory(categoryId);
+       //     Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByCategory(categoryId), products.GetBrandsDict(), products.GetCategoriesDict());
+       //     return View("List",info);
+       // }
        
-        public IActionResult FindByBrand(int brandId)
-        {
-            Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByBrand(brandId), products.GetBrandsDict(), products.GetCategoriesDict());
-            return View("List", info);
-        }
+       // public IActionResult FindByBrand(int brandId)
+       // {
+       //     Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByBrand(brandId), products.GetBrandsDict(), products.GetCategoriesDict());
+       //     return View("List", info);
+       // }
 
         public IActionResult Index()
         {

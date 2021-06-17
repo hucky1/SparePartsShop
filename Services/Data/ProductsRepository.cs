@@ -59,16 +59,16 @@ namespace SparePartsShop.Services.Data
         {
             return _context.Categories;
         }
-        public IEnumerable<Product> GetByCategory(int categoryId)
-        {
-            var items = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
-            return items;
-        }
-        public IEnumerable<Product> GetByBrand(int brandId)
-        {
-            var items = _context.Products.Where(x => x.BrandId == brandId).ToList();
-            return items;
-        }
+        //public IEnumerable<Product> GetByCategory(int categoryId)
+        //{
+        //    //var items = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
+        //    /return items;
+        //}
+        //public IEnumerable<Product> GetByBrand(int brandId)
+        //{
+        //    //var items = _context.Products.Where(x => x.BrandId == brandId).ToList();
+        //    //return items;
+        //}
 
     }
 }

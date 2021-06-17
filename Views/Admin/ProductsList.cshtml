@@ -1,5 +1,5 @@
 ﻿
-@model Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>>
+@*@model Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>>
 
 @{
     ViewData["Title"] = "ProductsList";
@@ -66,7 +66,7 @@
                     @Html.DisplayFor(modelItem => item.Img)
                 </td>
                 <td>
-                    @*@Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value*@
+                    
                     @Html.DisplayFor(modelItem => @Model.Item2.FirstOrDefault(x => x.Key == item.BrandId).Value)
                 </td>
                 <td>
@@ -82,4 +82,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
