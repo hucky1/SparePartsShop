@@ -73,8 +73,14 @@ namespace SparePartsShop
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "admin",
+                   pattern: "admin",
+                   defaults: new { controller = "Admin", action = "Login" });
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
             });
         }
     }

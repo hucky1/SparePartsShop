@@ -20,9 +20,27 @@ namespace SparePartsShop.Controllers
             _ordersRepository = ordersRepository;
             _productsRepository = productsRepository;
         }
+      
 
-        public IActionResult Index()=>
-            View(_ordersRepository.GetOrders());
+        //public IActionResult Index() =>
+        //    View("Login");
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Main(AdminLogin admin)
+        {
+            if (admin.Password == "adminHello")
+            {
+                var orders = _ordersRepository.GetOrders();
+                return View(orders);
+            }
+            else
+                return View("Error");
+        }
+           
         
         public RedirectToActionResult DeleteOrder(int id)
         {

@@ -38,5 +38,6 @@ namespace SparePartsShop.Services.Data
 
 
         }
+        public DbSet<SparePartsShop.Models.AdminLogin> AdminLogin { get; set; }
     }
 }   
