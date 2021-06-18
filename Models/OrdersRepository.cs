@@ -21,36 +21,33 @@ namespace SparePartsShop.Models
         {
             _context.SaveChanges();
         }
-        //public void CreateOrder(Order order)
-        //{
-        //    order.OrderTime = DateTime.Now;
-        //    _context.Orders.Add(order);
-        //    _context.SaveChanges();
+        public void CreateOrder(Client client)
+        {
+            
+             Order clientOrder = new Order();
+            
+            
+           
 
-        //    var items = _shopCart.GetShopCartItems();
+            var items = _shopCart.GetShopCartItems();
 
-        //    foreach (var el in items)
-        //    {
-        //        OrderDetails orderDetails = new OrderDetails
-        //        {
-        //            ProductId = el.Product.Id,
-        //            OrderId = order.Id,
-        //            Price = (uint)el.Product.Cost,
-        //            Product = el.Product,
-        //            Order = order
-                    
-                    
-        //        };
-        //        _context.SaveChanges();
-        //        _shopCart.DeleteItem(el.Id);
-        //        _context.SaveChanges();
-        //        _context.OrdersDetails.Add(orderDetails);
-        //    }
-        //    _context.SaveChanges();
-        //}
-        //public Order GetOrder(int id)=>
-        //            _context.Orders.FirstOrDefault(x => x.Id == id);
-        
+            foreach (var el in items)
+            {
+                clientOrder.Products.Add(el);
+                _shopCart.DeleteItem(el.Id);
+                _context.SaveChanges();
+               
+            }
+           // clientOrder.Client = client;
+            _context.Orders.Add(clientOrder);
+            _context.SaveChanges();
+            client.Order = clientOrder;
+            _context.Clients.Add(client);
+            _context.SaveChanges();
+        }
+        public Order GetOrder(int id) =>
+                    _context.Orders.FirstOrDefault(x => x.Id == id);
+
         //public void DeleteOrder(int id)
         //{
         //    var item = _context.Orders.FirstOrDefault(x => x.Id == id);

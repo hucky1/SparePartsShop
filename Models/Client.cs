@@ -14,8 +14,9 @@ namespace SparePartsShop.Models
         public string Adress { get; set; }
         public string PhoneNumner { get; set; }
         public string Email { get; set; }
-        [ForeignKey("Order")]
+        
         public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
         public Order Order { get; set; }
 
     }

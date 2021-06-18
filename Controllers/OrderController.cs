@@ -22,27 +22,27 @@ namespace SparePartsShop.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult Index(Order order)
-        //{
-        //    if (_shopCart.GetShopCartItems().Count == 0)
-        //    {
-        //        ModelState.AddModelError("", "Вы не выбрали товары для покупки.");
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        _orderRepository.CreateOrder(order);
-        //        return RedirectToAction("Complete");
-        //    }
-        //    return View(order);
-        //}
+        [HttpPost]
+        public IActionResult Index(Client client)
+        {
+            if (_shopCart.GetShopCartItems().Count == 0)
+            {
+                ModelState.AddModelError("", "Вы не выбрали товары для покупки.");
+            }
+            if (ModelState.IsValid)
+            {
+               _orderRepository.CreateOrder(client);
+                return RedirectToAction("Complete");
+            }
+            return View(client);
+        }
 
-        //public IActionResult Edit(int id)
-        //{
-        //    var item = _orderRepository.GetOrder(id);
-        //    return View(item);
-        //}
-     
+        public IActionResult Edit(int id)
+        {
+            var item = _orderRepository.GetOrder(id);
+            return View(item);
+        }
+
         public IActionResult Complete()
         {
             ViewBag.Message = "Заказ успешно обработан.";

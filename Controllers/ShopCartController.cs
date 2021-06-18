@@ -33,13 +33,13 @@ namespace SparePartsShop.Controllers
             _shopCart.DeleteItem(id);
             return RedirectToAction("Index");
         }
-        //public RedirectToActionResult AddToCart(int id)
-        //{
-        //    var item = _productsRepository.GetProducts().FirstOrDefault(x => x.Id == id);
-        //    if (item is not null)
-        //        _shopCart.AddToCart(item);
-        //    return RedirectToAction("Index");
-        //}
-       
+        public RedirectToActionResult AddToCart(int id)
+        {
+            var item = _productsRepository.GetProducts().FirstOrDefault(x => x.Id == id);
+            if (item is not null)
+                _shopCart.AddToCart(item);
+            return RedirectToAction("Index");
+        }
+
     }
 }

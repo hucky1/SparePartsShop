@@ -15,6 +15,9 @@ namespace SparePartsShop.Controllers
     public class ProductsController : Controller
     {
         private  ProductsRepository products;
+        Dictionary<int, string> Brands;
+         Dictionary<int, string> Categories;
+        Dictionary<int, string> Fuels;
 
         //private readonly ArticlesRepository articlesRepository;
         //public ArticlesController(ArticlesRepository articlesRepository)
@@ -24,6 +27,9 @@ namespace SparePartsShop.Controllers
         public ProductsController(ProductsRepository repository)
         {
             products = repository;
+            Brands = products.GetBrandsDict();
+            Categories = products.GetCategoriesDict();
+            Fuels = products.GetFuelsDict();
         }
         public RedirectToActionResult ResetSearchresults()
         {
@@ -31,19 +37,23 @@ namespace SparePartsShop.Controllers
 
             return RedirectToAction("List");
         }
-       
-       //public IActionResult FindByCategory(int categoryId)
-       //{
-       //     //CurrentProducts = products.GetByCategory(categoryId);
-       //     Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByCategory(categoryId), products.GetBrandsDict(), products.GetCategoriesDict());
-       //     return View("List",info);
-       // }
-       
-       // public IActionResult FindByBrand(int brandId)
-       // {
-       //     Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(products.GetByBrand(brandId), products.GetBrandsDict(), products.GetCategoriesDict());
-       //     return View("List", info);
-       // }
+
+        public IActionResult FindByCategory(int categoryId)
+        {
+            var info = products.GetByCategory(categoryId);
+            //CurrentProducts = products.GetByCategory(categoryId);
+            ViewBag.Brands = Brands;
+            ViewBag.Categories = Categories;
+            return View("List", info);
+        }
+
+        public IActionResult FindByBrand(int brandId)
+        {
+            var info = products.GetByBrand(brandId);
+            ViewBag.Brands =Brands;
+            ViewBag.Categories = Categories;
+            return View("List", info);
+        }
 
         public IActionResult Index()
         {
@@ -51,9 +61,10 @@ namespace SparePartsShop.Controllers
         }
         public ViewResult List()
         {
-            // products.Initial();
-
-            Tuple<IEnumerable<Product>, Dictionary<int,string>, Dictionary<int, string>> info = new(products.GetProducts(), products.GetBrandsDict(),products.GetCategoriesDict());
+            ViewBag.Brands = Brands;
+            ViewBag.Categories = Categories;
+           
+            IEnumerable<Product> info = products.GetProducts();
          return View(info);
         }
     }

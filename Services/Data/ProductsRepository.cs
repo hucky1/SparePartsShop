@@ -32,6 +32,12 @@ namespace SparePartsShop.Services.Data
             _context.Categories.ToList().ForEach(x => categories.Add(x.Id, x.CategoryName));
             return categories;
         }
+        public Dictionary<int, string> GetFuelsDict()
+        {
+            Dictionary<int, string> fuels = new Dictionary<int, string>();
+            _context.Fuels.ToList().ForEach(x => fuels.Add(x.Id, x.Name));
+            return fuels;
+        }
         public Product GetProduct(Product product)
         {
             Product prod = _context.Products.SingleOrDefault(g => g.Id == product.Id);
@@ -59,16 +65,16 @@ namespace SparePartsShop.Services.Data
         {
             return _context.Categories;
         }
-        //public IEnumerable<Product> GetByCategory(int categoryId)
-        //{
-        //    //var items = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
-        //    /return items;
-        //}
-        //public IEnumerable<Product> GetByBrand(int brandId)
-        //{
-        //    //var items = _context.Products.Where(x => x.BrandId == brandId).ToList();
-        //    //return items;
-        //}
+        public IEnumerable<Product> GetByCategory(int categoryId)
+        {
+            var items = _context.Products.Where(x => x.Category.Id == categoryId).ToList();
+            return items;
+        }
+        public IEnumerable<Product> GetByBrand(int brandId)
+        {
+            var items = _context.Products.Where(x => x.Brand.Id == brandId).ToList();
+            return items;
+        }
 
     }
 }

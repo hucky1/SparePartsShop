@@ -1,4 +1,4 @@
-﻿@model Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>>
+﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "List";
 }
@@ -15,9 +15,9 @@
                 Марки
             </button>
             <div class="dropdown-menu">
-                @foreach (var item in Model.Item2)
+                @foreach (var item in ViewBag.Brands)
                 {
-                    @*@Html.ActionLink(item.Value, "FindByBrand", new { id = item.Key})*@
+                   
                     <a class="dropdown-item" asp-controller="Products" asp-action="FindByBrand" asp-route-brandId="@item.Key">@item.Value</a>
                 }
             </div>
@@ -27,7 +27,7 @@
                 Категории
             </button>
             <div class="dropdown-menu">
-                @foreach (var item in Model.Item3)
+                @foreach (var item in ViewBag.Categories)
                 {
                     <a class="dropdown-item" asp-controller="Products" asp-action="FindByCategory" asp-route-categoryId="@item.Key">@item.Value</a>
                 }
@@ -36,7 +36,7 @@
     </div>
     
     <div class="flex-container">
-        @foreach (var product in Model.Item1)
+        @foreach (var product in Model)
         {
             @*@Model.Item2.FirstOrDefault(x => x.Key == product.BrandId).Value*@
             //var _brand = Model.Item2.Where(x => x.Id == product.BrandId).FirstOrDefault().Name;
@@ -49,15 +49,15 @@
                 <div class="card-body">
                     @*@Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value //////// types.FirstOrDefault(x => x.Value == "one").Key*@
                     @*<h5 class="card-title">Категория: @Model.Item3.Where(x => x.Id == product.CategoryId).FirstOrDefault().CategoryName</h5>*@
-                    @*<h5 class="card-title">Категория: @Model.Item3.FirstOrDefault(x => x.Key == product.CategoryId).Value</h5>*@
+                    <h5 class="card-title">Категория: @product.Category.CategoryName</h5>
                     <p class="card-text">
                     <p class="card-text">
-                        @*Бренд: @_brand<br>*@
+                        Бренд: @product.Brand.Name<br>
                         Модель: @product.Model<br>
                         Кузов: @product.CarBody<br>
                         Цена: @product.Cost руб.<br>
                         Год производства: @product.ProductionYear<br>
-                        Тип двигателя: @product.FuelType<br>
+                        Тип топлива: @product.FuelType.Name<br>
                         Объем двигателя: @product.EngineCapacity<br>
                     </p>
                     <a class="btn btn-primary" asp-controller="ShopCart" asp-action="AddToCart" asp-route-id="@product.Id">Добавить в корзину</a>

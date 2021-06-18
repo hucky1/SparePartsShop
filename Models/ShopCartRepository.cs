@@ -28,16 +28,16 @@ namespace SparePartsShop.Models
             return new ShopCartRepository(context) { ShopCartId = shopCartId }; 
              
         }
-        //public void AddToCart(Product product)
-        //{
-        //    _context.ShopCartItems.Add(new ShopCartItem
-        //    {
-        //        ShopCartId = ShopCartId,
-        //        Product = product,
-        //        Price = product.Cost
-        //    });
-        //    _context.SaveChanges();
-        //}
+        public void AddToCart(Product product)
+        {
+            _context.OrderItems.Add(new OrderItem
+            {
+                ShopCartId = ShopCartId,
+                Product = product,
+                
+            });
+            _context.SaveChanges();
+        }
         public void DeleteItem(int id)
         {
             var item = _context.OrderItems.FirstOrDefault(x => x.Id == id);
