@@ -10,16 +10,23 @@ namespace SparePartsShop.Models
 
         [Display(Name = "Модель")]
         public string Model { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BrandId { get; set; }
         [Display(Name = "Марка")]
-
+        
+        [ForeignKey("BrandId")]
         public Brand Brand { get; set; }
+        
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         [Display(Name = "Категория")]
-
         public Category Category { get; set; }
         [Display(Name = "Цена")]
         public int Cost { get; set; }
         [Display(Name = "Объём двигателя")]
         public double EngineCapacity { get; set; }
+        public int FuelTypeId { get; set; }
+        [ForeignKey("FuelTypeId")]
         [Display(Name = "Топливо")]
         public Fuel FuelType { get; set; }
         [Display(Name = "Путь к картинке")]
@@ -38,12 +45,12 @@ namespace SparePartsShop.Models
 
         //public virtual List<OrderDetails> OrderDetails { get; set; }
 
-        //public Product(int id, string model, string carBody, string fuelType, string engineCapacity, string productionYear, string img, int brandId, int cost, int categoryId)
+        //public Product(int id, string model, string carBody, int fuelType, float engineCapacity, string productionYear, string img, int brandId, int cost, int categoryId)
         //{
         //    Id = id;
         //    Model = model;
         //    CarBody = carBody;
-        //    FuelType = fuelType;
+        //    FuelTypeId = fuelType;
         //    EngineCapacity = engineCapacity;
         //    ProductionYear = productionYear;
         //    Img = img;

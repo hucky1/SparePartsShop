@@ -30,24 +30,25 @@ namespace SparePartsShop.Models
         }
         public void AddToCart(Product product)
         {
-            _context.OrderItems.Add(new OrderItem
+            _context.ShopCartItems.Add(new ShopCartItem
             {
                 ShopCartId = ShopCartId,
-                Product = product,
-                
+                ProductId = product.Id
             });
             _context.SaveChanges();
         }
         public void DeleteItem(int id)
         {
-            var item = _context.OrderItems.FirstOrDefault(x => x.Id == id);
-            _context.OrderItems.Remove(item);
+            var item = _context.ShopCartItems.FirstOrDefault(x => x.Id == id);
+            _context.ShopCartItems.Remove(item);
             _context.SaveChanges();
         }
+        public decimal ComputeTotalValue() =>
+            GetShopCartItems().Sum(e => e.Product.Cost);
  
-        public List<OrderItem> GetShopCartItems()
+        public List<ShopCartItem> GetShopCartItems()
         {
-            return _context.OrderItems.Where(c => c.ShopCartId == ShopCartId).Include(s=> s.Product).ToList();
+            return _context.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s=> s.Product).ToList();
         }
     }
 }

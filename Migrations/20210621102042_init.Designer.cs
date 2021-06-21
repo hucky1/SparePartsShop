@@ -10,8 +10,8 @@ using SparePartsShop.Services.Data;
 namespace SparePartsShop.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210617211433_Initial")]
-    partial class Initial
+    [Migration("20210621102042_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,8 +84,7 @@ namespace SparePartsShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Clients");
                 });
@@ -127,10 +126,10 @@ namespace SparePartsShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShopCartId")
@@ -152,13 +151,14 @@ namespace SparePartsShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BrandId")
+                    b.Property<int>("BrandId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("CarBody")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cost")
@@ -167,7 +167,7 @@ namespace SparePartsShop.Migrations
                     b.Property<double>("EngineCapacity")
                         .HasColumnType("float");
 
-                    b.Property<int?>("FuelTypeId")
+                    b.Property<int>("FuelTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Img")
@@ -190,11 +190,49 @@ namespace SparePartsShop.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SparePartsShop.Models.Reviews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserName")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("SparePartsShop.Models.ShopCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShopCartId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShopCartItems");
+                });
+
             modelBuilder.Entity("SparePartsShop.Models.Client", b =>
                 {
                     b.HasOne("SparePartsShop.Models.Order", "Order")
-                        .WithOne("Client")
-                        .HasForeignKey("SparePartsShop.Models.Client", "OrderId")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -203,13 +241,19 @@ namespace SparePartsShop.Migrations
 
             modelBuilder.Entity("SparePartsShop.Models.OrderItem", b =>
                 {
-                    b.HasOne("SparePartsShop.Models.Order", null)
+                    b.HasOne("SparePartsShop.Models.Order", "Order")
                         .WithMany("Products")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SparePartsShop.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
@@ -218,21 +262,38 @@ namespace SparePartsShop.Migrations
                 {
                     b.HasOne("SparePartsShop.Models.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SparePartsShop.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SparePartsShop.Models.Fuel", "FuelType")
                         .WithMany("Products")
-                        .HasForeignKey("FuelTypeId");
+                        .HasForeignKey("FuelTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
 
                     b.Navigation("FuelType");
+                });
+
+            modelBuilder.Entity("SparePartsShop.Models.ShopCartItem", b =>
+                {
+                    b.HasOne("SparePartsShop.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SparePartsShop.Models.Brand", b =>
@@ -252,8 +313,6 @@ namespace SparePartsShop.Migrations
 
             modelBuilder.Entity("SparePartsShop.Models.Order", b =>
                 {
-                    b.Navigation("Client");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

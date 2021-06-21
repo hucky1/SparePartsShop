@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<SparePartsShop.Models.Order>
+﻿@model IEnumerable<Client>
 
 @{
     ViewData["Title"] = "Main";
@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.Adress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.PhoneNumner)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -45,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.Adress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                @Html.DisplayFor(modelItem => item.PhoneNumner)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -53,10 +53,10 @@
             <td>
                 <a asp-action="Edit" asp-controller="Order" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="DeleteOrder" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="DeleteOrder" asp-route-id="@item.OrderId">Delete</a>
             </td>
         </tr>
 }
     </tbody>
     
-</table>*@
+</table>

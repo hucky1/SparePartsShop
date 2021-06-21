@@ -14,11 +14,13 @@ namespace SparePartsShop.Controllers
 
         private OrdersRepository _ordersRepository;
         private ProductsRepository _productsRepository;
+        private ClientsRepository _clientsRepository;
 
-        public AdminController(OrdersRepository ordersRepository,ProductsRepository productsRepository)
+        public AdminController(OrdersRepository ordersRepository,ProductsRepository productsRepository, ClientsRepository clientsRepository)
         {
             _ordersRepository = ordersRepository;
             _productsRepository = productsRepository;
+            _clientsRepository = clientsRepository;
         }
       
 
@@ -34,24 +36,24 @@ namespace SparePartsShop.Controllers
         {
             if (admin.Password == "adminHello")
             {
-                var orders = _ordersRepository.GetOrders();
+                var orders = _clientsRepository.GetClients();
                 return View(orders);
             }
             else
                 return View("Error");
         }
-           
-        
-        //public RedirectToActionResult DeleteOrder(int id)
-        //{
-        //    _ordersRepository.DeleteOrder(id);
-        //    return RedirectToAction("Index");
-        //}
-        //public RedirectToActionResult DeleteDetails(int id)
-        //{
-        //    _ordersRepository.GetOrderDetails(id);
-        //    return RedirectToAction("Details");
-        //}
+
+
+        public RedirectToActionResult DeleteOrder(int id)
+        {
+            _ordersRepository.DeleteOrder(id);
+            return RedirectToAction("Index");
+        }
+        public RedirectToActionResult DeleteDetails(int id)
+        {
+            _ordersRepository.GetOrderDetails(id);
+            return RedirectToAction("Details");
+        }
         public RedirectToActionResult DeleteProduct(int id)
         {
             _productsRepository.Delete(id);
@@ -61,28 +63,37 @@ namespace SparePartsShop.Controllers
         {
             ViewBag.BrandId = _productsRepository.GetBrandsDict().Select(r => new SelectListItem(r.Value,r.Key.ToString()));
             ViewBag.CategoryId = _productsRepository.GetCategoriesDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
+            ViewBag.FuelId = _productsRepository.GetFuelsDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
             return View("ProductForm", new Product());
         }
         [HttpPost]
         public RedirectToActionResult ProcessCreate(Product product)
         {
             Product prod = _productsRepository.GetProduct(product);
+           
+
 
             if (prod is not null)
             {
-                //prod.BrandId = product.BrandId;
-                //prod.CarBody = product.CarBody;
-                //prod.CategoryId = product.CategoryId;
-                //prod.Cost = prod.Cost;
-                //prod.EngineCapacity = product.EngineCapacity;
-                //prod.FuelType = product.FuelType;
-                //prod.Img = product.Img;
-                //prod.ProductionYear = product.ProductionYear;
-                //prod.Model = product.Model;
-                //_productsRepository.Save();
+                prod.BrandId = product.Brand.Id;
+                prod.CategoryId = product.Category.Id;
+                prod.FuelTypeId = product.FuelType.Id;
+                prod.CarBody = product.CarBody;
+                prod.Cost = product.Cost;
+                prod.EngineCapacity = product.EngineCapacity;
+                prod.Img = product.Img;
+                prod.ProductionYear = product.ProductionYear;
+                prod.Model = product.Model;
+                _productsRepository.Save();
             }
             else
             {
+                product.BrandId = product.Brand.Id;
+                product.CategoryId = product.Category.Id;
+                product.FuelTypeId = product.FuelType.Id;
+                product.Brand = null;
+                product.Category = null;
+                product.FuelType = null;
                 _productsRepository.Add(product);
             }
             
@@ -93,33 +104,38 @@ namespace SparePartsShop.Controllers
             Product product = _productsRepository.GetProducts().SingleOrDefault(x => x.Id == id);
             ViewBag.BrandId = _productsRepository.GetBrandsDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
             ViewBag.CategoryId = _productsRepository.GetCategoriesDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
+            ViewBag.FuelId = _productsRepository.GetFuelsDict().Select(r => new SelectListItem(r.Value, r.Key.ToString()));
             return View("ProductForm", product);
         }
-        //public IActionResult Details(int id)
-        //{
-        //    var item = _ordersRepository.GetOrder(id);
-        //    List<OrderDetails> itemOrders = _ordersRepository.GetOrderDetails(id);
-        //    Tuple<Order, List<OrderDetails>> info = new(item, itemOrders);
-        //    return View(info);
-        //}
-        public IActionResult ProductsList()
+        public IActionResult Details(int id)
         {
-            Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>> info = new(_productsRepository.GetProducts(), _productsRepository.GetBrandsDict(), _productsRepository.GetCategoriesDict());
+            var item = _clientsRepository.GetClient(id);
+            List<OrderItem> itemOrders = _ordersRepository.GetOrderDetails(item.OrderId);
+            Tuple<Client, List<OrderItem>> info = new(item, itemOrders);
             return View(info);
         }
-        //[HttpPost]
-        //public IActionResult Save(Order order)
-        //{
-        //    Order oldOrder = _ordersRepository.GetOrder(order.Id);
+        public IActionResult ProductsList()
+        {
+            ViewBag.BrandId = _productsRepository.GetBrandsDict();
+            ViewBag.CategoryId = _productsRepository.GetCategoriesDict();
+            ViewBag.FielId = _productsRepository.GetFuelsDict();
+            //Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>, Dictionary<int, string>> info = new(_productsRepository.GetProducts(), _productsRepository.GetBrandsDict(), _productsRepository.GetCategoriesDict(),_productsRepository.GetFuelsDict());
+            var info = _productsRepository.GetProducts();
+            return View(info);
+        }
+        [HttpPost]
+        public IActionResult Save(Client client)
+        {
+            Client oldOrder = _clientsRepository.GetClient(client.Id);
 
-        //    oldOrder.Name = order.Name;
-        //    oldOrder.SurName = order.SurName;
-        //    oldOrder.Phone = order.Phone;
-        //    oldOrder.Adress = order.Adress;
-        //    oldOrder.Email = order.Email;
-        //    _ordersRepository.Save();
-        //    return View("Index", _ordersRepository.GetOrders());
-        //}
+            oldOrder.Name = client.Name;
+            oldOrder.SurName = client.SurName;
+            oldOrder.PhoneNumner = client.PhoneNumner;
+            oldOrder.Adress = client.Adress;
+            oldOrder.Email = client.Email;
+            _ordersRepository.Save();
+            return View("Main", _ordersRepository.GetOrders());
+        }
 
 
     }

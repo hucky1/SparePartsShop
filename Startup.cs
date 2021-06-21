@@ -33,10 +33,11 @@ namespace SparePartsShop
             services.AddTransient<OrdersRepository>();
             services.AddTransient<ProductsRepository>();
             services.AddTransient<ShopCartRepository>();
-           // services.AddScoped(sp => ShopCartRepository.GetCart(sp));
+            services.AddTransient<ClientsRepository>();
+            // services.AddScoped(sp => ShopCartRepository.GetCart(sp));
             //services.AddTransient(sp => ShopCartRepository.GetCart(sp));
-           
-           
+
+
             //if (connection.Contains("[DataDirectory]"))
             //{
             //    connection = connection.Replace("[DataDirectory]", AppContext.BaseDirectory.Replace("\\","\\\\").Insert(2,"\\\\"));

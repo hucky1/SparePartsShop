@@ -17,6 +17,8 @@ namespace SparePartsShop.Services.Data
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems{ get; set; }
+        public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<ShopCartItem> ShopCartItems { get; set; }
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
            // Database.EnsureDeleted();

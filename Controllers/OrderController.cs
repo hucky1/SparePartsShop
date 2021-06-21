@@ -39,7 +39,7 @@ namespace SparePartsShop.Controllers
 
         public IActionResult Edit(int id)
         {
-            var item = _orderRepository.GetOrder(id);
+            var item = _orderRepository.GetClient(id);
             return View(item);
         }
 
