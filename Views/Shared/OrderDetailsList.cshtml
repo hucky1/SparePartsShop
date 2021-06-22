@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SparePartsShop.Models.OrderItem>
+﻿@model Tuple<List<OrderItem>,Dictionary<int,string>>
 
 <div class="container">
     <table class="table">
@@ -17,11 +17,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Item1)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Product.Category)
+                        @Html.DisplayFor(modelItem => Model.Item2[item.Product.CategoryId] )
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Product.Model)
@@ -31,7 +31,7 @@
                     </td>
                     <td>
                        
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </td>
                 </tr>
             }

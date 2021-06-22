@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SparePartsShop.Models;
+using SparePartsShop.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,10 +13,13 @@ namespace SparePartsShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        ReviewsRepository _reviewsRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger,ReviewsRepository reviewsRepository)
         {
             _logger = logger;
+            _reviewsRepository = reviewsRepository;
         }
 
         public IActionResult Index()
@@ -28,7 +32,7 @@ namespace SparePartsShop.Controllers
         }
         public IActionResult About()
         {
-            return View();
+            return View(_reviewsRepository.GetReviews());
         }
         public IActionResult Privacy()
         {

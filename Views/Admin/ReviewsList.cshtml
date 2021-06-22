@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SparePartsShop.Models.Reviews>
+
+@{
+    ViewData["Title"] = "ReviewsList";
+}
+
+<h1 class="text-center">Отзывы</h1>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Отзыв
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        <a asp-action="DeleteReview" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

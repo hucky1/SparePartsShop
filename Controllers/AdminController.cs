@@ -15,12 +15,14 @@ namespace SparePartsShop.Controllers
         private OrdersRepository _ordersRepository;
         private ProductsRepository _productsRepository;
         private ClientsRepository _clientsRepository;
+        private ReviewsRepository _reviewsRepository;
 
-        public AdminController(OrdersRepository ordersRepository,ProductsRepository productsRepository, ClientsRepository clientsRepository)
+        public AdminController(OrdersRepository ordersRepository,ProductsRepository productsRepository, ClientsRepository clientsRepository,ReviewsRepository reviewsRepository)
         {
             _ordersRepository = ordersRepository;
             _productsRepository = productsRepository;
             _clientsRepository = clientsRepository;
+            _reviewsRepository = reviewsRepository;
         }
       
 
@@ -111,7 +113,8 @@ namespace SparePartsShop.Controllers
         {
             var item = _clientsRepository.GetClient(id);
             List<OrderItem> itemOrders = _ordersRepository.GetOrderDetails(item.OrderId);
-            Tuple<Client, List<OrderItem>> info = new(item, itemOrders);
+            var categories = _productsRepository.GetCategoriesDict();
+            Tuple<Client, List<OrderItem>,Dictionary<int,string>> info = new(item, itemOrders,categories);
             return View(info);
         }
         public IActionResult ProductsList()
@@ -121,6 +124,17 @@ namespace SparePartsShop.Controllers
             ViewBag.FielId = _productsRepository.GetFuelsDict();
             //Tuple<IEnumerable<Product>, Dictionary<int, string>, Dictionary<int, string>, Dictionary<int, string>> info = new(_productsRepository.GetProducts(), _productsRepository.GetBrandsDict(), _productsRepository.GetCategoriesDict(),_productsRepository.GetFuelsDict());
             var info = _productsRepository.GetProducts();
+            return View(info);
+        }
+        public RedirectToActionResult DeleteReview(int id)
+        {
+            _reviewsRepository.Delete(id);
+            return RedirectToAction("ReviewsList");
+        }
+        public IActionResult ReviewsList()
+        {
+           
+            var info = _reviewsRepository.GetReviews();
             return View(info);
         }
         [HttpPost]

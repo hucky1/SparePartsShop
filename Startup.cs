@@ -34,6 +34,7 @@ namespace SparePartsShop
             services.AddTransient<ProductsRepository>();
             services.AddTransient<ShopCartRepository>();
             services.AddTransient<ClientsRepository>();
+            services.AddTransient<ReviewsRepository>();
             // services.AddScoped(sp => ShopCartRepository.GetCart(sp));
             //services.AddTransient(sp => ShopCartRepository.GetCart(sp));
 

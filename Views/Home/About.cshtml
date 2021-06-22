@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Reviews>
 @{ ViewData["Title"] = "About"; }
 
 <div class="theme-page">
@@ -43,47 +43,54 @@
                     <li class="template-bullet"> Мы можем помочь вам во всем, от замены масла до замены двигателя </li>
                     <li class="template-bullet">Мы можем решить любую проблему как с иностранными, так и с отечественными автомобилями  </li>
                 </ul>
+                <br />
+
+                @Html.ActionLink("Оставить отзыв", "Create", "Review", new { area = "btn btn-primary" })
+                <br /><br />
             </div>
             <div class="column column-1-2">
-                <a href="images/samples/870x580/image_05.jpg" class="prettyPhoto re-preload" title="Brake Repair">
+                <a href="~/images/samples/870x580/image_05.jpg" class="prettyPhoto re-preload" title="Brake Repair">
                     <img src='~/images/samples/570x380/image_05.jpg' alt='img'>
                 </a>
                 <div class="row margin-top-30">
                     <div class="column column-1-2">
-                        <a href="images/samples/870x580/image_07.jpg" class="prettyPhoto re-preload" title="Wheel Services">
+                        <a href="~/images/samples/870x580/image_07.jpg" class="prettyPhoto re-preload" title="Wheel Services">
                             <img src='~/images/samples/570x380/image_07.jpg' alt='img'>
                         </a>
                     </div>
                     <div class="column column-1-2">
-                        <a href="images/samples/870x580/image_02.jpg" class="prettyPhoto re-preload" title="Oil Change">
+                        <a href="~/images/samples/870x580/image_02.jpg" class="prettyPhoto re-preload" title="Oil Change">
                             <img src='~/images/samples/570x380/image_02.jpg' alt='img'>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+       
         <div class="row full-width padding-top-70 padding-bottom-66 parallax parallax-2">
             <div class="row testimonials-container">
-                <a href="#" class="slider-control left template-arrow-left-1"></a>
+                <a href="#" class="slider-control left@*template-arrow-left-*@1"></a>
                 <ul class="testimonials-list">
-                    <li>
-                        <div class="hexagon small"><div class="sl-small-pen"></div></div>
-                        <p>
-                            Я очень рекомендую это место всем, кто хочет отличного обслуживания, честной цены и действительно замечательных людей ».
-                        </p>
-                        <h6>Владимир Шишков</h6>
-                        <!--<div class="author-details">CEO OF NEW PORT COMPANY</div>-->
-                    </li>
-                    <li>
-                        <div class="hexagon small"><div class="sl-small-pen"></div></div>
-                        <p>
-                            "Понадобился срочно АКБ (хороший и недорого). За 5 минут проконсультировали и подобрали 2 варианта. Забирал сам (так удобнее) - до машины донесли, установили (бесплатно), старый в зачет + скидка до ровного счета. Получилась самая дешевая модель в городе"
-                        </p>
-                        <h6>Игорь Пупенко</h6>
-                        <!--<div class="author-details">CEO OF NEW PORT COMPANY</div>-->
-                    </li>
+                    @{
+                        @foreach (var i in Model)
+                        {
+                            <li>
+                                <p>
+                                   @i.Text
+                                </p>
+                                <h6>@i.UserName</h6>
+
+                                <div class="hexagon small"><div class="sl-small-pen"></div></div>
+
+                                <!--<div class="author-details">CEO OF NEW PORT COMPANY</div>-->
+                            </li>
+                        }
+
+                    }
+
+
                 </ul>
-                <a href="#" class="slider-control right template-arrow-left-1"></a>
+                <a href="#" class="slider-control right"></a>
             </div>
         </div>
     </div>

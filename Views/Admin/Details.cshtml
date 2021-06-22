@@ -1,4 +1,4 @@
-﻿@model Tuple<Client, List<OrderItem>>
+﻿@model Tuple<Client, List<OrderItem>,Dictionary<int,string>>
 
 @{
     ViewData["Title"] = "Details";
@@ -42,7 +42,7 @@
         </dd>
     </dl>
 </div>
-@Html.Partial("OrderDetailsList", Model.Item2)
+@Html.Partial("OrderDetailsList", new Tuple<List<OrderItem>,Dictionary<int,string>>(Model.Item2,Model.Item3))
 
 <div>
     <a asp-action="Index">Back to List</a>
