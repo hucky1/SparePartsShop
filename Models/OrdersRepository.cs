@@ -66,11 +66,11 @@ namespace SparePartsShop.Models
 
         public void DeleteOrder(int id)
         {
-            var item = _context.Clients.FirstOrDefault(x => x.Id == id);
-            _context.Clients.Remove(item);
-            _context.Orders.Remove(_context.Orders.FirstOrDefault(x => x.Id == item.OrderId));
+            var item = _context.Orders.FirstOrDefault(x => x.Id == id);
+            _context.Orders.Remove(item);
+            _context.Orders.Remove(_context.Orders.FirstOrDefault(x => x.Id == item.Id));
             _context.SaveChanges();
-            var details = _context.OrderItems.Where(x => x.ShopCartId == _shopCart.ShopCartId);
+            var details = _context.OrderItems.Where(x => x.OrderId == item.Id);
             _context.OrderItems.RemoveRange(details);
             _context.SaveChanges();
         }
@@ -90,11 +90,16 @@ namespace SparePartsShop.Models
             }
             return orderItems;
         }
-        public List<Client> GetOrders()
+        public List<Client> GetClients()
         {
             var items  = _context.Clients.ToList();
             return items;
         }
-       // public List<Order> GetOrders() => _context.Orders.ToList();
+        public List<Order> GetOrders()
+        {
+            var items = _context.Orders.ToList();
+            return items;
+        }
+        // public List<Order> GetOrders() => _context.Orders.ToList();
     }
 }

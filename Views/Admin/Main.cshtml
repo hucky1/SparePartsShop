@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Client>
+﻿@model Tuple<IEnumerable<Client>, List<Order>>
 
 @{
     ViewData["Title"] = "Main";
@@ -16,25 +16,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Имя
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SurName)
+                Фамилия
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Adress)
+                Адрес
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumner)
+                Номер телефона
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Эл. почта
             </th>
+            <td>
+                Время заказа
+            </td>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Item1) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -50,6 +53,11 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Model.Item2.FirstOrDefault(x=> x.Id==item.OrderId).OrderTime
+               
+                @*@Html.DisplayFor(modelItem => item.)*@
             </td>
             <td>
                 <a asp-action="Edit" asp-controller="Order" asp-route-id="@item.Id">Edit</a> |

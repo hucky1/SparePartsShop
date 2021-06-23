@@ -38,8 +38,11 @@ namespace SparePartsShop.Controllers
         {
             if (admin.Password == "adminHello")
             {
-                var orders = _clientsRepository.GetClients();
-                return View(orders);
+                
+                var Clients = _clientsRepository.GetClients();
+                var Orders = _ordersRepository.GetOrders();
+                Tuple<IEnumerable<Client>, List<Order>> info = new(Clients, Orders);
+                return View(info);
             }
             else
                 return View("Error");
